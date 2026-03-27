@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👑 ملك الكبده</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+            color: #fff;
+
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('images/bg.jpg') no-repeat center center fixed;
+
+            background-size: cover;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-bottom: 2px solid gold;
+        }
+
+        h1 {
+            color: gold;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 15px;
+        }
+
+        .menu {
+            flex: 2;
+        }
+
+        .section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        button {
+            background: orange;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .cart {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>👑 ملك الكبده</h1>
+        <p>أحلى كبده وسجق 🔥</p>
+    </header>
+
+    <div class="container">
+
+        <div class="menu">
+            <div class="section">
+
+                <div class="card">
+                    <h3>كبده فينو</h3>
+                    <p>18 جنيه</p>
+                    <button onclick="addItem('كبده فينو',18)">أضف</button>
+                </div>
+
+                <div class="card">
+                    <h3>سجق</h3>
+                    <p>20 جنيه</p>
+                    <button onclick="addItem('سجق',20)">أضف</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="cart">
+            <h2>🛒 طلبك</h2>
+            <div id="cartItems"></div>
+            <div id="total">0 جنيه</div>
+        </div>
+
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addItem(name, price) {
+            let item = cart.find(i => i.name === name);
+            if (item) { item.qty++; }
+            else { cart.push({ name, price, qty: 1 }); }
+
+            render();
+        }
+
+        function render() {
+            let html = "";
+            let total = 0;
+
+            cart.forEach(i => {
+                total += i.price * i.qty;
+                html += `<p>${i.name} × ${i.qty}</p>`;
+            });
+
+            document.getElementById("cartItems").innerHTML = html;
+            document.getElementById("total").innerText = total + " جنيه";
+        }
+    </script>
+
+</body>
+
+</html>
